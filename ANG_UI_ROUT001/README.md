@@ -36,3 +36,86 @@ Once that is done, we can move on to our application’s ```config``` object. Here
 
 Next we want to pass the URL of our home state into ```$urlRouterProvider.otherwise()```, so it maps our application to this state by default. We will then need to use ```$stateProvider```, which is what we will be dealing with for the rest of the tutorial. ```$stateProvider``` is what ui-router gives developers to use when routing applications. A state corresponds to a “place” in the application in terms of the overall UI and navigation. A state describes what the UI looks like and what it does at that place. It works in the same way that ```ngRoute``` uses ```routeProvider```. 
 
+Below is a how the ```app.js``` file should look at this moment. Once we have configured the ```urlRouterProvider```, we utilize ```$stateProvider``` to define the different states of the application. In this instance, we are defining a state named home, and only the URL is configured.
+
+```javascript
+angular.module('app', ['ui.router'])
+  .config(['$stateProvider', '$urlRouterProvider', 
+    function($stateProvider, $urlRouterProvider) {
+      $urlRouterProvider.otherwise('/');
+      $stateProvider
+      .state('home', {
+        url: '/'
+      });
+    }
+  ]);
+```
+
+##The Views Object
+
+Now that you have the bare-bones set up, you need to define a ```views``` object inside of ```$stateProvider```. It should be placed immediately following the home state’s URL. Inside this object is where we are going to define the names of our views, as well as the paths of their templates. Here you can also define things such as controllers; however, I have passed over that for the sake of brevity in this tutorial. 
+
+Moving on, we must first create and define an unnamed view that will target the parent state — which in this case is home. The ```templateUrl``` of this unnamed view will essentially tie the two together. This is known as relative naming and tells angular to insert this unnamed view in the ```<div ui-view>``` inside our ```index.html``` file. Your code should now replicate the ```app.js``` below. 
+
+```javascript
+angular.module('app', ['ui.router'])
+  .config(['$stateProvider', '$urlRouterProvider', 
+    function($stateProvider, $urlRouterProvider) {
+      $urlRouterProvider.otherwise('/');
+      $stateProvider
+        .state('home', {
+          url: '/',
+          views: {
+            '': { 
+              templateUrl: './templates/main.html' 
+            },
+          }
+        });
+     }
+   ]);
+```
+
+As you can see, the unnamed view resolves to ```main.html```, which should resemble the code below.
+
+```javascript
+<div ui-view="nav"></div>
+<h1 class="text-center">This content is in main.html</h1>
+<div ui-view="body"></div>
+<div ui-view="footer"></div>
+```
+
+The file ```main.html``` includes three named views – nav, body, and footer. In order for these components to appear under the home state, we must define them using absolute naming. Specifically, we must use the @ syntax to tell AngularJS that these components of our application should be mapped to a specific state. This follows the ```viewName@stateName``` syntax and tells our application to utilize named views from an absolute, or specific state. You can [read more about relative vs. absolute names here](https://github.com/angular-ui/ui-router/wiki/Multiple-Named-Views#view-names---relative-vs-absolute-names).
+
+You will see ```@home``` used throughout our config object, to ensure that Angular knows our named views target our home state. If these absolute names are not present, the application will not know where to find these named views. That said, take a look below and see how the application should be routed. 
+
+```javascript
+angular.module('app', ['ui.router'])
+  .config(['$stateProvider', '$urlRouterProvider', 
+    function($stateProvider, $urlRouterProvider) {
+      $urlRouterProvider.otherwise('/');
+      $stateProvider
+        .state('home', {
+          url: '/',
+          views: {
+            '': { templateUrl: './templates/main.html'},
+            'nav@home': { templateUrl: './templates/assets/nav.html' },
+            'body@home': { templateUrl: './templates/body.html'},
+            'footer@home': { templateUrl: './templates/assets/footer.html' }
+         }
+      });
+    }
+  ]);
+```
+
+And this is what we end up with:
+
+See [demo on CodePen](http://codepen.io/SitePoint/pen/JYdXVa)
+
+##Why This Is Great
+
+As I said earlier, absolute naming makes your code extremely modular. In this tutorial, I placed all of our views inside of a templates folder. However, you can take this a step further and create folders for the different views of your applications. This allows you to reuse templates throughout your application, as well as in future projects! The ui-router library makes it extremely easy to use different components of a web application, such as header and footers for specific views. This will make it easier to reuse code throughout different projects, and can definitely save you time. 
+
+
+##Conclusion
+
+There is much more complex, high-level nesting you can do with absolute names — this was only one example! Nonetheless, I hope you gained a deeper perspective of some of the things that ui-router makes possible. In [this article written by Antonio Morales](http://www.webcodegeeks.com/javascript/angular-js/angularjs-ui-router-components/), he does an extremely good job of explaining the differences between absolute and relative naming, child states, and other aspects of Angular’s ui-router library. As always, let me know if you have any questions regarding this tutorial. I would be happy to answer them. 
