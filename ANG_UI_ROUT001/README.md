@@ -30,4 +30,9 @@ Let’s begin configuring our application. Inside of our ```app.js``` file, we nee
 angular.module('app', ['ui.router'])
 ```
 
+##Configuring Our Routes
+
+Once that is done, we can move on to our application’s ```config``` object. Here, we will be dealing with [$stateProvider](http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$stateProvider) and [$urlRouterProvider](http://angular-ui.github.io/ui-router/site/#/api/ui.router.router.$urlRouterProvider), so we need to inject them into our config object in order to have them available.
+
+
 
