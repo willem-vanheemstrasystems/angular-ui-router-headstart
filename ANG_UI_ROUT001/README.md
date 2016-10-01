@@ -24,4 +24,10 @@ Take a minute to navigate through the files that make up this demo (available at
 
 ###Add a Dependency to ui-router
 
+Let’s begin configuring our application. Inside of our ```app.js``` file, we need to add a dependency on the ui-router to our main angular module.
+
+```javascript
+angular.module('app', ['ui.router'])
+```
+
 
