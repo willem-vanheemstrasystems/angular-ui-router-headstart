@@ -115,7 +115,6 @@ See [demo on CodePen](http://codepen.io/SitePoint/pen/JYdXVa)
 
 As I said earlier, absolute naming makes your code extremely modular. In this tutorial, I placed all of our views inside of a templates folder. However, you can take this a step further and create folders for the different views of your applications. This allows you to reuse templates throughout your application, as well as in future projects! The ui-router library makes it extremely easy to use different components of a web application, such as header and footers for specific views. This will make it easier to reuse code throughout different projects, and can definitely save you time. 
 
-
 ##Conclusion
 
 There is much more complex, high-level nesting you can do with absolute names — this was only one example! Nonetheless, I hope you gained a deeper perspective of some of the things that ui-router makes possible. In [this article written by Antonio Morales](http://www.webcodegeeks.com/javascript/angular-js/angularjs-ui-router-components/), he does an extremely good job of explaining the differences between absolute and relative naming, child states, and other aspects of Angular’s ui-router library. As always, let me know if you have any questions regarding this tutorial. I would be happy to answer them. 
