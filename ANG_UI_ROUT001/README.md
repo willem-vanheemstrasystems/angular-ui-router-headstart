@@ -34,5 +34,5 @@ angular.module('app', ['ui.router'])
 
 Once that is done, we can move on to our application’s ```config``` object. Here, we will be dealing with [$stateProvider](http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$stateProvider) and [$urlRouterProvider](http://angular-ui.github.io/ui-router/site/#/api/ui.router.router.$urlRouterProvider), so we need to inject them into our config object in order to have them available.
 
-
+Next we want to pass the URL of our home state into ```$urlRouterProvider.otherwise()```, so it maps our application to this state by default. We will then need to use ```$stateProvider```, which is what we will be dealing with for the rest of the tutorial. ```$stateProvider``` is what ui-router gives developers to use when routing applications. A state corresponds to a “place” in the application in terms of the overall UI and navigation. A state describes what the UI looks like and what it does at that place. It works in the same way that ```ngRoute``` uses ```routeProvider```. 
 
